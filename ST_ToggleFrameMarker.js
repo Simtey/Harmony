@@ -10,7 +10,7 @@ var selectedFrame = Timeline.firstFrameSel;
 var color;
 var currentFrameMarker = Timeline.getFrameMarker(selectedLayer, selectedFrame);
 
-function ST_ToggleFrameMarker() {
+function ToggleFrameMarker() {
 	if (currentFrameMarker === undefined) { // if no marker --> place a red one
 		color = "Red";
 		placeFM();
