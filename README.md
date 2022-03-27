@@ -10,6 +10,6 @@
 **ST_TobAntkSwitch** : Switch between three way to show the animatic. (designed for a specific animation series)
 * mode 1 = the original display (animatic in small on the scene)
 * mode 2 = animatic full screen over the scene
-* mode 3 = new Display_Animatic to setup on a newr camera
+* mode 3 = new Display_Animatic to setup on a new camera
 
 site : http://www.simonthery.fr 
