@@ -39,7 +39,6 @@ function ToggleFrameMarker() {		// colors can be changed --> list = Red, Orange,
 
 	function deleteFM() {
 		var markerID = currentFrameMarker.id; // gets the marker ID
-		// var markerColor = currentFrameMarker.type; // gets the marker color
 		Timeline.deleteFrameMarker(selectedLayer, markerID); // delete the marker on the current selected frame
 	}
 }
