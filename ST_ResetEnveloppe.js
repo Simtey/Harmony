@@ -11,7 +11,7 @@ When the script is added in Harmony --> to add it as a shortcut :
 4. save the sortcuts.xml file (You must have the administrator permission)
 5. boot or reboot Harmony --> you can now find the script in Edit --> Keyboard shortcuts
 */
-*/
+
 var selectedNode = selection.selectedNode(selectedNode);
 var parent = node.parentNode(selectedNode);
 var currentNode;
