@@ -8,12 +8,12 @@ mode 3 = new Antk display
 */
 function TobAntkSwitch() {
 	MessageLog.clearLog();
-	var AntkNode = "Top/Antk";
+	var AntkNode = "Top/Display_ANIMATIC";
 	var nodeExist = node.isLinked(AntkNode,
 		0
 	)
 	// Put the animatic full screen
-	scene.beginUndoRedoAccum("Create Antk Display");
+	scene.beginUndoRedoAccum("Animatic switch display");
 	if (node.getEnable("Top/ANIMATIC-activate_to_minimize")) {
 		node.setEnable("Top/ANIMATIC-activate_to_minimize", false);
 	// If already full screen we setup the new display
@@ -21,7 +21,7 @@ function TobAntkSwitch() {
 		if (nodeExist === false) { // check if the node exists for the toggle
 			//add the display node
 			node.add("Top/",
-				"Antk",
+				"Display_ANIMATIC",
 				"DISPLAY",
 				800,
 				3850,
