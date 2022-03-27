@@ -1,7 +1,7 @@
 ### Animation tools for Toon Boom Harmony ###
 
 **ST_ResetEnveloppe** : simplify the way to reset a deformer.
-*select just one point of the deformer to reset it.
+* select just one point of the deformer to reset it.
 
 **ST_ToggleFrameMarkers** : Add / delete a frame marker on the selected frame. 
 * Change the color by clicking again on it (Red, Blue, Orange, none)
