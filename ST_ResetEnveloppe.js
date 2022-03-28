@@ -12,7 +12,7 @@ When the script is added in Harmony --> to add it as a shortcut :
 5. boot or reboot Harmony --> you can now find the script in Edit --> Keyboard shortcuts
 */
 
-var selectedNode = selection.selectedNode(selectedNode);
+var selectedNode = selection.selectedNode(0);
 var parent = node.parentNode(selectedNode);
 var currentNode;
 
