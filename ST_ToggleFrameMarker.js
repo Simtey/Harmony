@@ -18,8 +18,8 @@ scene.beginUndoRedoAccum("Create Frame markers");
 var selectedFrame = Timeline.firstFrameSel;
 var selectedNode = selection.selectedNode(selectedFrame); //get the selectedNode
 var selectedLayer = Timeline.selToLayer(selectedNode); // convert the node to layerIndex
-var color;
 var currentFrameMarker = Timeline.getFrameMarker(selectedLayer, selectedFrame);
+var color;
 
 function ToggleFrameMarker() {		// colors can be changed --> list = Red, Orange, Yellow, Green, Cyan, Blue, Purple, Pink, White, Black
 	if (currentFrameMarker === undefined) { // if no marker --> place a red one
