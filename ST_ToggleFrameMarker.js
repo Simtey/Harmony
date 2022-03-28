@@ -1,15 +1,17 @@
 /* Simon Thery - 2022 - ST_ToggleFrameMarker 1.0
 A script to simply add or delete a frame marker
+--> select a frame on the timeline then run the script :
+- One time = Red (or delete all frame marker non red/blue)
+- Two time = Blue
+- Three time = Orange
+- The fourth delete the frame marker
 
-When the script is added in Harmony --> to add it as a shortcut :
-1. Edit to the files : C:\Program Files (x86)\Toon Boom Animation\Toon Boom Harmony 21 Premium\resources\shortcuts.xml
-2. Go to the end of the file and on a line above the closing tag </shortcuts>
-3. paste the following lines
+------CODE POUR SHORTCUTS.XML---------
+
 <category condition="not scan and not paint and hasTagging" id="ST_scripts" text="Scripts" >
 	<shortcut checkable="false" id="ToggleFrameMarker"  itemParameter="ToggleFrameMarker in ST_ToggleFrameMarker.js"  responder="scriptResponder" slot="onActionExecuteScript(QString)" text="ToggleFrameMarker"  value=""/>
-</category>
-4. save the sortcuts.xml file (You must have the administrator permission)
-5. boot or reboot Harmony --> you can now find the script in Edit --> Keyboard shortcuts
+
+--------------------------------------
 */
 scene.beginUndoRedoAccum("Create Frame markers");
 //MessageLog.clearLog();

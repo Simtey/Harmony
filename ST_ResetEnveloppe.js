@@ -1,15 +1,12 @@
 /* Simon Thery - 2022 - ST_ResetEnveloppe 1.0
-select just one point of a deformer to reset it.
+select just one point of a deformer to reset the rentier shape
 
-When the script is added in Harmony --> to add it as a shortcut :
-1. Edit to the files : C:\Program Files (x86)\Toon Boom Animation\Toon Boom Harmony 21 Premium\resources\shortcuts.xml
-2. Go to the end of the file and on a line above the closing tag </shortcuts>
-3. paste the following lines
+------CODE POUR SHORTCUTS.XML---------
+
 <category condition="not scan and not paint and hasTagging" id="ST_scripts" text="Scripts" >
 	<shortcut checkable="false" id="ResetEnveloppe"  itemParameter="ResetEnveloppe in ST_ResetEnveloppe.js"  responder="scriptResponder" slot="onActionExecuteScript(QString)" text="ResetEnveloppe"  value=""/>
-</category>
-4. save the sortcuts.xml file (You must have the administrator permission)
-5. boot or reboot Harmony --> you can now find the script in Edit --> Keyboard shortcuts
+	
+--------------------------------------
 */
 
 var selectedNode = selection.selectedNode(0);

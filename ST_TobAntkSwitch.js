@@ -5,6 +5,12 @@ A toogle to make the animatic more convenient to animate
 mode 1 = the original display (animatic in small on the scene)
 mode 2 = animatic full screen over the scene
 mode 3 = new Antk display
+
+------CODE POUR SHORTCUTS.XML---------
+
+<shortcut checkable="false" id="TobAntkSwitch"  itemParameter="TobAntkSwitch in ST_TobAntkSwitch.js"  responder="scriptResponder" slot="onActionExecuteScript(QString)" text="TobAntkSwitch"  value=""/>
+
+--------------------------------------
 */
 function TobAntkSwitch() {
 	MessageLog.clearLog();
