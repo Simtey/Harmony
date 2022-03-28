@@ -3,7 +3,6 @@ select just one point of a deformer to reset the rentier shape
 
 ------CODE FOR SHORTCUTS.XML---------
 
-<category condition="not scan and not paint and hasTagging" id="ST_scripts" text="Scripts" >
 	<shortcut checkable="false" id="ResetEnveloppe"  itemParameter="ResetEnveloppe in ST_ResetEnveloppe.js"  responder="scriptResponder" slot="onActionExecuteScript(QString)" text="ResetEnveloppe"  value=""/>
 	
 --------------------------------------

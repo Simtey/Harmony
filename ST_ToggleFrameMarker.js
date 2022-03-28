@@ -8,7 +8,6 @@ A script to simply add or delete a frame marker
 
 ------CODE FOR SHORTCUTS.XML---------
 
-<category condition="not scan and not paint and hasTagging" id="ST_scripts" text="Scripts" >
 	<shortcut checkable="false" id="ToggleFrameMarker"  itemParameter="ToggleFrameMarker in ST_ToggleFrameMarker.js"  responder="scriptResponder" slot="onActionExecuteScript(QString)" text="ToggleFrameMarker"  value=""/>
 
 --------------------------------------
