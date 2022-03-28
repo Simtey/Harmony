@@ -15,9 +15,9 @@ A script to simply add or delete a frame marker
 */
 scene.beginUndoRedoAccum("Create Frame markers");
 //MessageLog.clearLog();
-var selectedNode = selection.selectedNode(Timeline.firstFrameSel); //get the selectedNode
-var selectedLayer = Timeline.selToLayer(selectedNode); // convert the node to layerIndex
 var selectedFrame = Timeline.firstFrameSel;
+var selectedNode = selection.selectedNode(selectedFrame); //get the selectedNode
+var selectedLayer = Timeline.selToLayer(selectedNode); // convert the node to layerIndex
 var color;
 var currentFrameMarker = Timeline.getFrameMarker(selectedLayer, selectedFrame);
 
