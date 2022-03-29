@@ -1,5 +1,5 @@
 /* Simon Thery - 2022 - ST_ResetEnveloppe 1.0
-select just one point of a deformer to reset the rentier shape
+select just one point of a deformer to reset the entire shape
 
 ------CODE FOR SHORTCUTS.XML---------
 
