@@ -7,7 +7,6 @@ create an empty drawing which keep the pivot in place and the deformer + select 
 	
 -------------------------------------
 */
-emptyDrawingPivotInPlace();
 function emptyDrawingPivotInPlace() {
 	scene.beginUndoRedoAccum("Creates a new drawing while keeping the old pivot");
 		var selectedNode = selection.selectedNode(0);
