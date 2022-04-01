@@ -13,13 +13,13 @@ function emptyDrawingPivotInPlace() {
 	var selectedFrame = Timeline.firstFrameSel;
 	var drawingColumn = node.linkedColumn(selectedNode, "DRAWING.ELEMENT");
 	var allLayerIsSelected = ToolProperties.getApplyToAllLayers();
-	column.duplicateDrawingAt(drawingColumn, selectedFrame);
-	Action.perform("onActionChooseSelectTool()");
-		ToolProperties.setApplyAllArts(true);
-	Action.perform("selectAll()", "cameraView");
-	Action.perform("deleteSelection()", "cameraView");
+	column.duplicateDrawingAt(drawingColumn, selectedFrame); // duplicate the selected drawing
+	Action.perform("onActionChooseSelectTool()"); // Select the selection tool
+		ToolProperties.setApplyAllArts(true); // turns on "apply to Line and Colour Art" tool property
+	Action.perform("selectAll()", "cameraView"); // select all the arts
+	Action.perform("deleteSelection()", "cameraView"); // and delete them
 	if (allLayerIsSelected === false) {
-		ToolProperties.setApplyAllArts(false);
+		ToolProperties.setApplyAllArts(false); // put back the "apply to..." to its original setup.
 	}
 	Action.perform("onActionChoosePencilTool()"); // choose the pencil
 	//Action.perform("onActionChooseBrushTool()");  // choose the brush
