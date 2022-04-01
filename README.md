@@ -7,6 +7,8 @@
 * Change the color by clicking again on it (Red, Blue, Orange, none)
 * More efficient when configured as a shortcut.
 
+**ST_emptyDrawingPivotInPlace** : Create empty drawing while keeping the pivot (and deformer)
+
 **ST_TobAntkSwitch** : Switch between three way to show the animatic. (designed for a specific animation series)
 * mode 1 = the original display (animatic in small on the scene)
 * mode 2 = animatic full screen over the scene
