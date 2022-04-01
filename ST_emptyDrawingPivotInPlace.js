@@ -12,12 +12,10 @@ function emptyDrawingPivotInPlace() {
 	var selectedNode = selection.selectedNode(0);
 	var selectedFrame = Timeline.firstFrameSel;
 	var drawingColumn = node.linkedColumn(selectedNode, "DRAWING.ELEMENT");
+	var allLayerIsSelected = ToolProperties.getApplyToAllLayers();
 	column.duplicateDrawingAt(drawingColumn, selectedFrame);
 	Action.perform("onActionChooseSelectTool()");
-	var allLayerIsSelected = ToolProperties.getApplyToAllLayers();
-	if (allLayerIsSelected === false) {
 		ToolProperties.setApplyAllArts(true);
-	}
 	Action.perform("selectAll()", "cameraView");
 	Action.perform("deleteSelection()", "cameraView");
 	if (allLayerIsSelected === false) {
