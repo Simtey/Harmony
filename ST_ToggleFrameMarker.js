@@ -1,4 +1,4 @@
-/* Simon Thery - 2022 - ST_ToggleFrameMarker 1.0
+/*
 A script to simply add or delete a frame marker
 --> select a frame on the timeline then run the script :
 - One time = Red (or delete all frame marker non red/blue)
