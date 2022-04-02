@@ -1,16 +1,13 @@
-/* Simon Thery - 2022 - ST_TobAntkSwitch 1.0
-Designed for Tobie Lolness production
+/*
+Designed for the Tobie Lolness production
 
 A toogle to make the animatic more convenient to animate
 mode 1 = the original display (animatic in small on the scene)
 mode 2 = animatic full screen over the scene
 mode 3 = new Antk display
 
-------CODE FOR SHORTCUTS.XML---------
-
-<shortcut checkable="false" id="TobAntkSwitch"  itemParameter="TobAntkSwitch in ST_TobAntkSwitch.js"  responder="scriptResponder" slot="onActionExecuteScript(QString)" text="TobAntkSwitch"  value=""/>
-
---------------------------------------
+version 1.0
+Author : Simon Thery - 2022
 */
 function TobAntkSwitch() {
 	MessageLog.clearLog();

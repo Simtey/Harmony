@@ -1,11 +1,7 @@
-/* Simon Thery - 2022 - ST_ResetEnveloppe 1.0
+/*
 select just one point of a deformer to reset the entire shape
-
-------CODE FOR SHORTCUTS.XML---------
-
-	<shortcut checkable="false" id="ResetEnveloppe"  itemParameter="ResetEnveloppe in ST_ResetEnveloppe.js"  responder="scriptResponder" slot="onActionExecuteScript(QString)" text="ResetEnveloppe"  value=""/>
-	
---------------------------------------
+version 1.0
+Author : Simon Thery - 2022
 */
 
 var selectedNode = selection.selectedNode(0);

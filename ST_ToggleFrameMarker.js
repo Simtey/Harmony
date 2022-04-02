@@ -5,12 +5,8 @@ A script to simply add or delete a frame marker
 - Two time = Blue
 - Three time = Orange
 - The fourth delete the frame marker
-
-------CODE FOR SHORTCUTS.XML---------
-
-	<shortcut checkable="false" id="ToggleFrameMarker"  itemParameter="ToggleFrameMarker in ST_ToggleFrameMarker.js"  responder="scriptResponder" slot="onActionExecuteScript(QString)" text="ToggleFrameMarker"  value=""/>
-
---------------------------------------
+version 1.0
+Author : Simon Thery - 2022
 */
 scene.beginUndoRedoAccum("Create Frame markers");
 //MessageLog.clearLog();

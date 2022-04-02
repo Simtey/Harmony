@@ -1,11 +1,7 @@
-/* Simon Thery - 2022 - ST_emptyDrawingPivotInPlace 1.0
+/*
 create an empty drawing which keep the pivot in place and the deformer + select the pencil and the line art.
-
-------CODE FOR SHORTCUTS.XML---------
-
-	<shortcut checkable="false" id="emptyDrawingPivotInPlace"  itemParameter="emptyDrawingPivotInPlace in ST_emptyDrawingPivotInPlace.js"  responder="scriptResponder" slot="onActionExecuteScript(QString)" text="emptyDrawingPivotInPlace"  value=""/>
-	
--------------------------------------
+version 1.0
+Author : Simon Thery - 2022
 */
 function emptyDrawingPivotInPlace() {
 	scene.beginUndoRedoAccum("Creates a new drawing while keeping the old pivot");
