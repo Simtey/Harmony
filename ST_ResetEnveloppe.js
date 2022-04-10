@@ -4,15 +4,13 @@ version 1.0
 Author : Simon Thery - 2022
 */
 
-var selectedNode = selection.selectedNode(0);
-var parent = node.parentNode(selectedNode);
-var currentNode;
-
 function ResetEnveloppe() {
+	var selectedNode = selection.selectedNode(0);
+	var parent = node.parentNode(selectedNode);
+	var currentNode;
 	scene.beginUndoRedoAccum("ResetEnveloppe");
 	// Select each point of the enveloppe in the group and reset the resting information.
 	var i = 0;
-	if (node.isGroup(parent)) {
 		while (i < node.numberOfSubNodes(parent)) {
 			currentNode = node.subNode(parent, i);
 			var offsetX = node.getTextAttr(currentNode, frame.current(), "restingoffset.x");
@@ -29,6 +27,5 @@ function ResetEnveloppe() {
 			node.setTextAttr(currentNode, "orientation1", frame.current(), orientation1);
 			i++;
 		}
-	}
 	scene.endUndoRedoAccum();
 }
