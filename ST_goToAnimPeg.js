@@ -17,7 +17,7 @@ function TobGoToAnimPeg() {
 	skipLocked();
 	LayerColour();
 	Action.perform("onActionCenterOnSelection()", "timelineView");
-	scene.endUndoRedoAccum();
+
 	function skipLocked() {
 		if (node.getLocked(selectedNode2) === true) {
 			Action.perform("onActionNaviSelectChild()", "Node View");
@@ -33,4 +33,5 @@ function TobGoToAnimPeg() {
 			node.setColor(selectedNode, myColor);
 		}
 	}
+	scene.endUndoRedoAccum();
 }
