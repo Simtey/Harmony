@@ -5,7 +5,7 @@ Select any part of the character then run the script.
 version 1.0
 Author : Simon Thery - 2022
 */
-function TobGoToAnimPeg() {
+function ST_TobFindAnimLayer() {
 	scene.beginUndoRedoAccum("Find the accurate layer to animate on");
 	Action.perform("onActionCollapseAll()", "timelineView");
 	var selectedNode = selection.selectedNode(0);
