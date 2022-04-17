@@ -5,7 +5,7 @@ Select any part of the character then run the script.
 version 1.0
 Author : Simon Thery - 2022
 */
-function ST_TobFindAnimLayer() {
+function TobFindAnimLayer() {
 	scene.beginUndoRedoAccum("Find the accurate layer to animate on");
 	Action.perform("onActionCollapseAll()", "timelineView");
 	var selectedNode = selection.selectedNode(0);
@@ -26,11 +26,10 @@ function ST_TobFindAnimLayer() {
 	}
 
 	function LayerColour() {
-		var selectedNode = selection.selectedNode(0);
 		var myColor = new ColorRGBA(175, 255, 35, 255); // chose your favorite RGB + Alpha colour.
-		var curLayColor = node.getColor(selectedNode);
+		var curLayColor = node.getColor(selectedNode2);
 		if (curLayColor.r === 0 && curLayColor.g === 0 && curLayColor.b === 0 && curLayColor.a === 255) {
-			node.setColor(selectedNode, myColor);
+			node.setColor(selectedNode2, myColor);
 		}
 	}
 	scene.endUndoRedoAccum();
