@@ -15,4 +15,7 @@
 * mode 2 = animatic full screen over the scene
 * mode 3 = new Display_Animatic to setup on a new camera
 
+**ST_TobFindAnimationLayer** : Easily find the main animation Peg. (designed for a specific animation series)
+- improvement to be done (next version) --> The layer is not centered on the timeline as it should be (API issue ?). The script needs to be launched 2 times.
+
 site : http://www.simonthery.fr 
