@@ -7,7 +7,6 @@ Author : Simon Thery - 2022
 */
 function TobFindAnimLayer() {
 	scene.beginUndoRedoAccum("Find the accurate layer to animate on");
-	Action.perform("onActionCollapseAll()", "timelineView");
 	var selectedNode = selection.selectedNode(0);
 	var parentNode = node.parentNode(selectedNode);
 	selection.clearSelection();
@@ -16,7 +15,10 @@ function TobFindAnimLayer() {
 	var selectedNode2 = selection.selectedNode(0);
 	skipLocked();
 	LayerColour();
+	Action.perform("onActionCollapseAll()", "timelineView"); // Issue here
 	Action.perform("onActionCenterOnSelection()", "timelineView");
+	// selection.clearSelection();
+	// selection.addNodeToSelection(selectedNode);
 
 	function skipLocked() {
 		if (node.getLocked(selectedNode2) === true) {
