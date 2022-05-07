@@ -9,7 +9,7 @@ function TobPosingsMarkers() {
 	var selectedNode = selection.selectedNode(0);
 	var selectedLayer = Timeline.selToLayer(selectedNode);
 	var currentKeyframe = -1;
-	var nextKeyframe
+	var nextKeyframe;
 	frame.setCurrent(1);
 	Action.perform("onActionGoToNextKeyFrame()", "timelineView")
 	Action.perform("onActionGoToPrevKeyFrame()", "timelineView") // hack not to mark the first frame if no kf on it
