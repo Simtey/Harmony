@@ -2,7 +2,8 @@
 Designed for the Tobie Lolness production
 Make it easier to find the animation peg.
 Select any part of the character then run the script.
-version 1.0
+version 1.1
+1.1 --> Skip the ado_size peg for Tobie and Leo both if it is disabled or locked.
 Author : Simon Thery - 2022
 */
 function TobFindAnimLayer() {
@@ -21,7 +22,7 @@ function TobFindAnimLayer() {
 	// selection.addNodeToSelection(selectedNode);
 
 	function skipLocked() {
-		if (node.getLocked(selectedNode2) === true) {
+		if (node.getLocked(selectedNode2) === true || node.getEnable(selectedNode2) === false) {
 			Action.perform("onActionNaviSelectChild()", "Node View");
 			selectedNode2 = selection.selectedNode(0);
 		}
