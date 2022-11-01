@@ -123,12 +123,12 @@ function upgradePuppet() {
         var tplNodes = sceneRoot.importTemplate(tplPath); // import the new tpl = oH A DEPLIER
         var compositeToDelete = tplNodes[0];
         node.deleteNode(compositeToDelete); // delete the useless imported composite 
-        var NewCharaGroupNode = tplNodes[1];
-        var numberOfSubNodes = node.numberOfSubNodes(NewCharaGroupNode)
-        var subNodes = node.subNodes(NewCharaGroupNode);
+        var newCharaGroupNode = tplNodes[1];
+        var numberOfSubNodes = node.numberOfSubNodes(newCharaGroupNode)
+        var subNodes = node.subNodes(newCharaGroupNode);
         var masterPegToDel = subNodes[numberOfSubNodes - 1];
         node.deleteNode(masterPegToDel); // delete the useless master peg inside the new puppet's group
-        node.explodeGroup(NewCharaGroupNode); //ungroup
+        node.explodeGroup(newCharaGroupNode); //ungroup
         masterPeg.y = masterPegSavePos; // put the master Peg in place.
         node.link(masterPeg, 0, characNodePath, 0); // and relink it
         node.link(newCharaCompNode, 0, allCharaCompNodeInfo.node, allCharaCompNodeInfo.port); // link the new puppet to it's original composite / port.
