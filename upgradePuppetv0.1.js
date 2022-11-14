@@ -27,6 +27,12 @@ function upgradePuppet() {
     var newCharaCompNode;
     var allCharaCompNodeInfo;
     var newBackdropDescription;
+    var firstFrame = scene.getStartFrame();
+    var numberOfFrames = scene.getStopFrame();
+    var tlCopy;
+    var myCopyOptions = copyPaste.getCurrentCreateOptions();
+    var myPasteOptions = copyPaste.getCurrentPasteOptions();
+    var newcharacNodePathTMP;
 
     if (!selectNode) {
         MessageBox.information("Sélectionner un élément de la puppet qui doit être remplacée");
@@ -90,6 +96,8 @@ function upgradePuppet() {
     }
 
     function oldPuppet() {
+        var copied = [characNodePath];
+        tlCopy = copyPaste.copy(copied,firstFrame,numberOfFrames,myCopyOptions); //dragObjet copy
         var getPeg = node.srcNode(characNodePath, 0); // old puppet's master peg
         masterPeg = doc.getNodeByPath(getPeg);
         masterPegPos = masterPeg.nodePosition; // save its position in the nodeview
@@ -135,7 +143,7 @@ function upgradePuppet() {
     }
 
     function restoreNodesPositions() {
-        var newcharacNodePathTMP = doc.getNodeByPath("Top/" + characName); //oH A DEPLIER
+        newcharacNodePathTMP = doc.getNodeByPath("Top/" + characName); //oH A DEPLIER
         var newBackdrops = newcharacNodePathTMP.containingBackdrops;
         var newBackdrop = newBackdrops[0];
         newBackdropDescription = newBackdrop.description;
@@ -158,6 +166,8 @@ function upgradePuppet() {
         }
         oldBackdrop.title = newTitle; // Set the new version in the backdrop title
         oldBackdrop.description = newBackdropDescription; // just in case set the descriptions from tpl backdrop
+        var tlPasted = [newcharacNodePathTMP];
+        copyPaste.paste(tlCopy,tlPasted,firstFrame,numberOfFrames,myPasteOptions);
     }
     scene.endUndoRedoAccum();
 }
