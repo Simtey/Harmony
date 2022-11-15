@@ -5,7 +5,7 @@ function upgradePuppet() {
     scene.beginUndoRedoAccum("upgradePuppet");
     var dir = new Dir;
     //--- EDITABLE = Puppets folder path ----------------------
-    dir.path = "C:/Users/SimTey/Desktop/TBL_Script/TBL_Script/"; // "//dionysos/Sync/04_BANK_TPL/"; just copy the link from MS windows and change the "\" by "/")
+    dir.path = "//dionysos/Sync/04_BANK_TPL/"; // "//dionysos/Sync/04_BANK_TPL/"; just copy the link from MS windows and change the "\" by "/") "C:/Users/SimTey/Desktop/TBL_Script/TBL_Script/"
     //---------------------------------------------------------
     var doc = $.scn;
     var sceneRoot = doc.root;
@@ -32,6 +32,7 @@ function upgradePuppet() {
     var tlCopy;
     var myCopyOptions = copyPaste.getCurrentCreateOptions();
     var myPasteOptions = copyPaste.getCurrentPasteOptions();
+
     var newcharacNodePathTMP;
 
     if (!selectNode) {
@@ -167,7 +168,8 @@ function upgradePuppet() {
         oldBackdrop.title = newTitle; // Set the new version in the backdrop title
         oldBackdrop.description = newBackdropDescription; // just in case set the descriptions from tpl backdrop
         var tlPasted = [newcharacNodePathTMP];
-        copyPaste.paste(tlCopy,tlPasted,firstFrame,numberOfFrames,myPasteOptions);
+copyPaste.setPasteSpecialDrawingFileMode("ONLY_CREATE_IF_DOES_NOT_EXIST");	
+copyPaste.paste(tlCopy,tlPasted,firstFrame,numberOfFrames,myPasteOptions);
     }
     scene.endUndoRedoAccum();
 }
