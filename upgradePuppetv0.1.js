@@ -5,7 +5,7 @@ function upgradePuppet() {
     scene.beginUndoRedoAccum("upgradePuppet");
     var dir = new Dir;
     //--- EDITABLE = Puppets folder path ----------------------
-    dir.path = "//dionysos/Sync/04_BANK_TPL/"; // "//dionysos/Sync/04_BANK_TPL/"; just copy the link from MS windows and change the "\" by "/") "C:/Users/SimTey/Desktop/TBL_Script/TBL_Script/"
+    dir.path = "C:/Users/SimTey/Desktop/TBL_Script/TBL_Script/"; // "//dionysos/Sync/04_BANK_TPL/"; just copy the link from MS windows and change the "\" by "/") "C:/Users/SimTey/Desktop/TBL_Script/TBL_Script/"
     //---------------------------------------------------------
     var doc = $.scn;
     var sceneRoot = doc.root;
@@ -32,6 +32,8 @@ function upgradePuppet() {
     var tlCopy;
     var myCopyOptions = copyPaste.getCurrentCreateOptions();
     var myPasteOptions = copyPaste.getCurrentPasteOptions();
+    myPasteOptions.drawingPasteAction = "ADD_OR_REMOVE_EXPOSURE";
+    copyPaste.setPasteSpecialDrawingFileMode("ONLY_CREATE_IF_DOES_NOT_EXIST");
 
     var newcharacNodePathTMP;
 
@@ -39,6 +41,11 @@ function upgradePuppet() {
         MessageBox.information("Sélectionner un élément de la puppet qui doit être remplacée");
         return;
     }
+    if (selection.selectedNode(1) !== "" ){
+        MessageBox.information("Un seul élément doit être selectionné");
+        return;
+    }
+
     if (!checkFile()) {
         MessageBox.information("Il n'y a pas de template disponible pour" + characName);
         return;
@@ -123,19 +130,24 @@ function upgradePuppet() {
         for (var n in oldBackdropNodes) {
             nodesPosition = oldBackdropNodes[n].nodePosition;
             nodesPositionToRestore.push(nodesPosition); // save the old puppet's nodes positions
-            oldBackdropNodes[n].remove(); // and delete them
+            oldBackdropNodes[n].remove(); // and delete these nodes.
             nodeLength = n;
         }
     }
 
     function newPuppet() {
-        var tplNodes = sceneRoot.importTemplate(tplPath); // import the new tpl = oH A DEPLIER
-        var compositeToDelete = tplNodes[0];
-        node.deleteNode(compositeToDelete); // delete the useless imported composite 
-        var newCharaGroupNode = tplNodes[1];
-        var numberOfSubNodes = node.numberOfSubNodes(newCharaGroupNode)
+        copyPaste.pasteTemplateIntoGroup(tplPath,"Top/",1) // import the tpl
+        var tplNodes = selection.selectedNodes();
+            for (var i = 0; i < tplNodes.length ; i++){
+                if (node.type(tplNodes[i]) === "COMPOSITE" ){ // in the array we get the composite we want to delete
+                node.deleteNode(tplNodes[i]);
+            } else if (node.type(tplNodes[i]) === "GROUP" ){ // and we get the group path
+                var newCharaGroupNode = tplNodes[i];
+            }
+        }
+        var numberOfSubNodes = node.numberOfSubNodes(newCharaGroupNode) 
         var subNodes = node.subNodes(newCharaGroupNode);
-        var masterPegToDel = subNodes[numberOfSubNodes - 1];
+        var masterPegToDel = subNodes[numberOfSubNodes - 1]; // we get the 1st node inside the group
         node.deleteNode(masterPegToDel); // delete the useless master peg inside the new puppet's group
         node.explodeGroup(newCharaGroupNode); //ungroup
         masterPeg.y = masterPegSavePos; // put the master Peg in place.
@@ -168,7 +180,6 @@ function upgradePuppet() {
         oldBackdrop.title = newTitle; // Set the new version in the backdrop title
         oldBackdrop.description = newBackdropDescription; // just in case set the descriptions from tpl backdrop
         var tlPasted = [newcharacNodePathTMP];
-copyPaste.setPasteSpecialDrawingFileMode("ONLY_CREATE_IF_DOES_NOT_EXIST");	
 copyPaste.paste(tlCopy,tlPasted,firstFrame,numberOfFrames,myPasteOptions);
     }
     scene.endUndoRedoAccum();
