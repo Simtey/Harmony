@@ -8,7 +8,6 @@ function upgradePuppet() {
     dir.path = "C:/Users/SimTey/Desktop/TBL_Script/TBL_Script/"; // "//dionysos/Sync/04_BANK_TPL/"; just copy the link from MS windows and change the "\" by "/") "C:/Users/SimTey/Desktop/TBL_Script/TBL_Script/"
     //---------------------------------------------------------
     var doc = $.scn;
-    var sceneRoot = doc.root;
     var selectNode = selection.selectedNode(0);
     var characNodePath = node.parentNode(selectNode);
     var characNodePathTMP = doc.$node(characNodePath);
@@ -30,10 +29,6 @@ function upgradePuppet() {
     var firstFrame = scene.getStartFrame();
     var numberOfFrames = scene.getStopFrame();
     var tlCopy;
-    var myCopyOptions = copyPaste.getCurrentCreateOptions();
-    var myPasteOptions = copyPaste.getCurrentPasteOptions();
-    myPasteOptions.drawingPasteAction = "ADD_OR_REMOVE_EXPOSURE";
-    copyPaste.setPasteSpecialDrawingFileMode("ONLY_CREATE_IF_DOES_NOT_EXIST");
 
     var newcharacNodePathTMP;
 
@@ -105,6 +100,7 @@ function upgradePuppet() {
 
     function oldPuppet() {
         var copied = [characNodePath];
+        var myCopyOptions = copyPaste.getCurrentCreateOptions();
         tlCopy = copyPaste.copy(copied,firstFrame,numberOfFrames,myCopyOptions); //dragObjet copy
         var getPeg = node.srcNode(characNodePath, 0); // old puppet's master peg
         masterPeg = doc.getNodeByPath(getPeg);
@@ -180,6 +176,10 @@ function upgradePuppet() {
         oldBackdrop.title = newTitle; // Set the new version in the backdrop title
         oldBackdrop.description = newBackdropDescription; // just in case set the descriptions from tpl backdrop
         var tlPasted = [newcharacNodePathTMP];
+        copyPaste.usePasteSpecial(true); // Tentative pour conserver les drawings qui sautent
+        copyPaste.setPasteSpecialDrawingAction("ADD_OR_REMOVE_EXPOSURE");
+        copyPaste.setPasteSpecialDrawingFileMode("ONLY_CREATE_IF_DOES_NOT_EXIST");
+        var myPasteOptions = copyPaste.getCurrentPasteOptions();
 copyPaste.paste(tlCopy,tlPasted,firstFrame,numberOfFrames,myPasteOptions);
     }
     scene.endUndoRedoAccum();
