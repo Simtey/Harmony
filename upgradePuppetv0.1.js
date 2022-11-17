@@ -1,11 +1,14 @@
-MessageLog.clearLog(); // TO DO : copier / coller clés
+/* v1.0 by Simon Thery
+- just select an element of a puppet, the script will replace it with its new version if there is an accurate TPL in the puppet's path"
+*/
+MessageLog.clearLog();
 include("openHarmony.js");
 
-function upgradePuppet() {
-    scene.beginUndoRedoAccum("upgradePuppet");
+function TOB_upgradePuppet() {
+    scene.beginUndoRedoAccum("TOB_upgradePuppet");
     var dir = new Dir;
     //--- EDITABLE = Puppets folder path ----------------------
-    dir.path = "C:/Users/SimTey/Desktop/TBL_Script/TBL_Script/"; // "//dionysos/Sync/04_BANK_TPL/"; just copy the link from MS windows and change the "\" by "/") "C:/Users/SimTey/Desktop/TBL_Script/TBL_Script/"
+    dir.path = "//dionysos/Sync/04_BANK_TPL/";
     //---------------------------------------------------------
     var doc = $.scn;
     var selectNode = selection.selectedNode(0);
@@ -141,10 +144,12 @@ function upgradePuppet() {
                 var newCharaGroupNode = tplNodes[i];
             }
         }
-        var numberOfSubNodes = node.numberOfSubNodes(newCharaGroupNode) 
         var subNodes = node.subNodes(newCharaGroupNode);
-        var masterPegToDel = subNodes[numberOfSubNodes - 1]; // we get the 1st node inside the group
-        node.deleteNode(masterPegToDel); // delete the useless master peg inside the new puppet's group
+        for (var i=0; i< subNodes.length ; i++){
+            if (node.type(subNodes[i]) === "PEG"){
+                node.deleteNode(subNodes[i]); // delete the useless master peg inside the new puppet's group //ATTENTION SI PLUSIEURS PEGS
+            }
+        }
         node.explodeGroup(newCharaGroupNode); //ungroup
         masterPeg.y = masterPegSavePos; // put the master Peg in place.
         node.link(masterPeg, 0, characNodePath, 0); // and relink it
