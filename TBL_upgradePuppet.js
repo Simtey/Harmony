@@ -38,7 +38,7 @@ function TOB_upgradePuppet() {
     var newcharacNodePathTMP;
 
     if (dir.exists === false) {
-        MessageBox.information("Chemin vers le dossier contenant les puppets introuvable !\n Renseignez le bon chemin en renseignant la balise EDITABLE dans le script.");
+        MessageBox.information("Chemin vers le dossier contenant les puppets introuvable !\n Renseignez le bon chemin dans le script (balise 'EDITABLE').");
         return;
     }
     if (!selectNode) {
