@@ -36,7 +36,7 @@ function TOB_upgradePuppet() {
     var tlCopy;
     var oldNodesGroup;
     var newcharacNodePathTMP;
-    
+
     if (dir.exists === false) {
         MessageBox.information("Chemin vers le dossier contenant les puppets introuvable !\n Renseignez le bon chemin en renseignant la balise EDITABLE dans le script.");
         return;
@@ -109,9 +109,6 @@ function TOB_upgradePuppet() {
     }
 
     function oldPuppet() {
-        /*var copied = [characNodePath];
-        var myCopyOptions = copyPaste.getCurrentCreateOptions();
-        tlCopy = copyPaste.copy(copied,firstFrame,numberOfFrames,myCopyOptions); //dragObjet copy*/
         var getPeg = node.srcNode(characNodePath, 0); // old puppet's master peg
         masterPeg = doc.getNodeByPath(getPeg);
         masterPegPos = masterPeg.nodePosition; // save its position in the nodeview
