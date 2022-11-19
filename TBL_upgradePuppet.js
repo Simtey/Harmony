@@ -1,5 +1,7 @@
-/* v1.0 by Simon Thery
-- just select an element of a puppet, the script will replace it with its new version if there is an accurate TPL in the puppet's path"
+/* v1.1 by Simon Thery (designed for the series "Tobie Lolness")
+Select an element of a puppet, the script will replace the entire puppet with its new version if there is an accurate TPL in the puppets folder"
+
+version 1.1 : Warning added if the dir.path is inaccurate + Put the old puppet inside a group to save it for later + function restoreAnimationKeys (save and paste timeline) is now separated.
 */
 MessageLog.clearLog();
 include("openHarmony.js");
@@ -8,7 +10,7 @@ function TOB_upgradePuppet() {
     scene.beginUndoRedoAccum("TOB_upgradePuppet");
     var dir = new Dir;
     //--- EDITABLE = Puppets folder path ----------------------
-    dir.path = "//dionysos/Sync/04_BANK_TPL/";
+    dir.path = "C:/Users/SimTey/Desktop/TBL_Script/TBL_Script/"; // "//dionysos/Sync/04_BANK_TPL/"; just copy the link from MS windows and change the "\" by "/") "C:/Users/SimTey/Desktop/TBL_Script/TBL_Script/"
     //---------------------------------------------------------
     var doc = $.scn;
     var selectNode = selection.selectedNode(0);
@@ -32,14 +34,18 @@ function TOB_upgradePuppet() {
     var firstFrame = scene.getStartFrame();
     var numberOfFrames = scene.getStopFrame();
     var tlCopy;
-
+    var oldNodesGroup;
     var newcharacNodePathTMP;
-
+    
+    if (dir.exists === false) {
+        MessageBox.information("Chemin vers le dossier contenant les puppets introuvable !\n Renseignez le bon chemin en renseignant la balise EDITABLE dans le script.");
+        return;
+    }
     if (!selectNode) {
         MessageBox.information("Sélectionner un élément de la puppet qui doit être remplacée");
         return;
     }
-    if (selection.selectedNode(1) !== "" ){
+    if (selection.selectedNode(1) !== "") {
         MessageBox.information("Un seul élément doit être selectionné");
         return;
     }
@@ -55,6 +61,7 @@ function TOB_upgradePuppet() {
     newPuppet();
     restoreNodesPositions();
     restoreBackdrops();
+    restoreAnimationKeys();
     MessageLog.trace(characName + " v0" + oldBackDropVersionNumber + " a été remplacé.e par " + characName + " v0" + tplVersionNumber); // At the end confirmation in the MessageLog
 
     function checkFile() {
@@ -102,9 +109,9 @@ function TOB_upgradePuppet() {
     }
 
     function oldPuppet() {
-        var copied = [characNodePath];
+        /*var copied = [characNodePath];
         var myCopyOptions = copyPaste.getCurrentCreateOptions();
-        tlCopy = copyPaste.copy(copied,firstFrame,numberOfFrames,myCopyOptions); //dragObjet copy
+        tlCopy = copyPaste.copy(copied,firstFrame,numberOfFrames,myCopyOptions); //dragObjet copy*/
         var getPeg = node.srcNode(characNodePath, 0); // old puppet's master peg
         masterPeg = doc.getNodeByPath(getPeg);
         masterPegPos = masterPeg.nodePosition; // save its position in the nodeview
@@ -117,7 +124,7 @@ function TOB_upgradePuppet() {
             for (var j = 0; j < numLinks; j++) {
                 var linkIdx = j;
                 allCharaCompNodeInfo = node.dstNodeInfo(newCharaCompNode, portIdx, linkIdx)
-                if (node.type(allCharaCompNodeInfo) == "COMPOSITE") {
+                if (node.type(allCharaCompNodeInfo) === "COMPOSITE") {
                     break;
                 }
             }
@@ -126,27 +133,38 @@ function TOB_upgradePuppet() {
         masterPeg.y = masterPegPos.y - 1000; // moves the Master peg outside the backdrop not to delete it.
         oldBackdropPos = oldBackdrop.position;
         oldBackdropNodes = oldBackdrop.nodes;
+
         for (var n in oldBackdropNodes) {
             nodesPosition = oldBackdropNodes[n].nodePosition;
             nodesPositionToRestore.push(nodesPosition); // save the old puppet's nodes positions
-            oldBackdropNodes[n].remove(); // and delete these nodes.
-            nodeLength = n;
         }
+
+        var nodesToGroup = oldBackdropNodes.join();
+        oldNodesGroup = node.createGroup(nodesToGroup, characName + "_v0" + oldBackDropVersionNumber + "_BKP"); //  save the old puppet's nodes inside a group    
+        var oldNodesGroupSub = node.subNodes(oldNodesGroup);
+
+        for (var o in oldNodesGroupSub) {
+            if (node.type(oldNodesGroupSub[o]) === "DISPLAY") {
+                node.deleteNode(oldNodesGroupSub[o], true, true); // bug fix delete the old display not to have a +1.
+            }
+        }
+        node.setCoord(oldNodesGroup, masterPegPos.x, masterPegPos.y - 100); // move the group outside the backdrop
+        node.unlink(allCharaCompNodeInfo.node, allCharaCompNodeInfo.port); // unlink this group from the charac composite
     }
 
     function newPuppet() {
-        copyPaste.pasteTemplateIntoGroup(tplPath,"Top/",1) // import the tpl
+        copyPaste.pasteTemplateIntoGroup(tplPath, "Top/", 1) // import the tpl
         var tplNodes = selection.selectedNodes();
-            for (var i = 0; i < tplNodes.length ; i++){
-                if (node.type(tplNodes[i]) === "COMPOSITE" ){ // in the array we get the composite we want to delete
+        for (var i = 0; i < tplNodes.length; i++) {
+            if (node.type(tplNodes[i]) === "COMPOSITE") { // in the array we get the composite we want to delete
                 node.deleteNode(tplNodes[i]);
-            } else if (node.type(tplNodes[i]) === "GROUP" ){ // and we get the group path
+            } else if (node.type(tplNodes[i]) === "GROUP") { // and we get the group path
                 var newCharaGroupNode = tplNodes[i];
             }
         }
         var subNodes = node.subNodes(newCharaGroupNode);
-        for (var i=0; i< subNodes.length ; i++){
-            if (node.type(subNodes[i]) === "PEG"){
+        for (var i = 0; i < subNodes.length; i++) {
+            if (node.type(subNodes[i]) === "PEG") {
                 node.deleteNode(subNodes[i]); // delete the useless master peg inside the new puppet's group //ATTENTION SI PLUSIEURS PEGS
             }
         }
@@ -180,12 +198,19 @@ function TOB_upgradePuppet() {
         }
         oldBackdrop.title = newTitle; // Set the new version in the backdrop title
         oldBackdrop.description = newBackdropDescription; // just in case set the descriptions from tpl backdrop
+    }
+
+    function restoreAnimationKeys() {
+        var tlCopied = [oldNodesGroup + "/" + characName]; // we copy the animation keys from the old character
+        var myCopyOptions = copyPaste.getCurrentCreateOptions();
+        tlCopy = copyPaste.copy(tlCopied, firstFrame, numberOfFrames, myCopyOptions); //dragObjet copy
         var tlPasted = [newcharacNodePathTMP];
-        copyPaste.usePasteSpecial(true); // Tentative pour conserver les drawings qui sautent
-        copyPaste.setPasteSpecialDrawingAction("ADD_OR_REMOVE_EXPOSURE");
-        copyPaste.setPasteSpecialDrawingFileMode("ONLY_CREATE_IF_DOES_NOT_EXIST");
+        //copyPaste.usePasteSpecial(true); // Tentative pour conserver les drawings qui sautent
+        //copyPaste.setPasteSpecialDrawingAction("ADD_OR_REMOVE_EXPOSURE");
+        //copyPaste.setPasteSpecialDrawingFileMode("ONLY_CREATE_IF_DOES_NOT_EXIST");
+        //copyPaste.setPasteSpecialMatchNodeName(true);
         var myPasteOptions = copyPaste.getCurrentPasteOptions();
-copyPaste.paste(tlCopy,tlPasted,firstFrame,numberOfFrames,myPasteOptions);
+        copyPaste.paste(tlCopy, tlPasted, firstFrame, numberOfFrames, myPasteOptions); // and we paste the keys to retrieve the posing / animations
     }
     scene.endUndoRedoAccum();
 }
