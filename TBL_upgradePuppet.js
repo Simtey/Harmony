@@ -145,7 +145,7 @@ function TOB_upgradePuppet() {
                 node.deleteNode(oldNodesGroupSub[o], true, true); // bug fix delete the old display not to have a +1.
             }
         }
-        node.setCoord(oldNodesGroup, masterPegPos.x, masterPegPos.y - 100); // move the group outside the backdrop
+        node.setCoord(oldNodesGroup, masterPegPos.x, masterPegPos.y - 150); // move the group outside the backdrop
         node.unlink(allCharaCompNodeInfo.node, allCharaCompNodeInfo.port); // unlink this group from the charac composite
     }
 
