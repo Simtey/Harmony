@@ -6,11 +6,11 @@ version 1.1 : Warning added if the dir.path is inaccurate + Put the old puppet i
 MessageLog.clearLog();
 include("openHarmony.js");
 
-function TOB_upgradePuppet() {
-    scene.beginUndoRedoAccum("TOB_upgradePuppet");
+function TBL_upgradePuppet() {
+    scene.beginUndoRedoAccum("TBL_upgradePuppet");
     var dir = new Dir;
     //--- EDITABLE = Puppets folder path ----------------------
-    dir.path = "C:/Users/SimTey/Desktop/TBL_Script/TBL_Script/"; // "//dionysos/Sync/04_BANK_TPL/"; just copy the link from MS windows and change the "\" by "/") "C:/Users/SimTey/Desktop/TBL_Script/TBL_Script/"
+    dir.path = "//dionysos/Sync/04_BANK_TPL/"; // Copy the puppet folder link from MS windows and change the "\" by "/"
     //---------------------------------------------------------
     var doc = $.scn;
     var selectNode = selection.selectedNode(0);
