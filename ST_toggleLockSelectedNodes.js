@@ -8,7 +8,6 @@ if (isFirstNodeLocked === false ){
     for (var i in selectednodes){
     node.setLocked(selectednodes[i],true);
     }
-scene.endUndoRedoAccum();
 }else if (isFirstNodeLocked === true){
     for (var i in selectednodes){
     node.setLocked(selectednodes[i],false);
