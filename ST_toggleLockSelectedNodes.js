@@ -3,8 +3,8 @@ function toggleLockSelectedNodes() {
     scene.beginUndoRedoAccum("toggleLockSelectedNodes");
 
     var selectednodes = selection.selectedNodes();
-    var lockedCount;
-    var unlockedCount;
+    var lockedCount =0;
+    var unlockedCount=0;
 
     for (var i in selectednodes) {
         if (node.getLocked(selectednodes[i]) === true) {
