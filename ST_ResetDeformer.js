@@ -1,7 +1,7 @@
 /*
 select just one point of a deformer to reset the entire shape
 version 1.0
-Author : Simon Thery - 2022
+Author : Simon Thery - 2022 - Licence : Mozilla Public License Version 2.0
 */
 
 function ResetEnveloppe() {
