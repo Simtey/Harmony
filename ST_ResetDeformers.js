@@ -1,10 +1,10 @@
-/* Simon Thery - 2022 - ST_ResetEnveloppeMulti 1.0
+/* Simon Thery - 2022 - ST_ResetDeformerd 1.0 - Licence : Mozilla Public License Version 2.0
 select just one point of deformers to reset the entire shapes */
 
 MessageLog.clearLog();
 
-function ResetEnveloppeMulti() {
-scene.beginUndoRedoAccum("ResetEnveloppeMulti");
+function ResetDeformers() {
+scene.beginUndoRedoAccum("ResetDeformers");
 var myNodes = selection.selectedNodes();
 var currentNode;
 var parents;
