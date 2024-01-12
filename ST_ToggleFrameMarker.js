@@ -6,7 +6,7 @@ A script to simply add or delete a frame marker
 - Three time = Orange
 - The fourth delete the frame marker
 version 1.0
-Author : Simon Thery - 2022
+Author : Simon Thery - 2022 - Licence : Mozilla Public License Version 2.0
 */
 scene.beginUndoRedoAccum("Create Frame markers");
 //MessageLog.clearLog();
