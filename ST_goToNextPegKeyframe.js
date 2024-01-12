@@ -1,8 +1,9 @@
-/* Simon Thery - 2022 - goToNextPegKeyframe v1.2
+/* Simon Thery - 2022 - goToNextPegKeyframe v1.3 - Licence : Mozilla Public License Version 2.0
 Select the first peg above the selected drawing and goes to the next keyframe
 
 version 1.1 : now also works with the deformers and if you directly select an attribute in the timemline.
 version 1.2 : if several pegs and/or deformers OR if several attributes are selected it goes to the nearest next keyframe of theses selected items.
+version 1.3 : fix the selection issue when the keyframe is at the last frame of the timeline
 */
 
 function goToNextPegKeyframe() {
