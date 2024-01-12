@@ -1,7 +1,7 @@
 /*
 Add a red marker on all the keys of the current layer.
 version 1.0
-Author : Simon Thery - 2022
+Author : Simon Thery - 2022 - Licence : Mozilla Public License Version 2.0
 */
 function TobPosingsMarkers() {
 	scene.beginUndoRedoAccum("Posing markers");
