@@ -1,6 +1,6 @@
 /*
 create an empty drawing which keep the pivot in place and the deformer + select the pencil and the line art.
-Author : Simon Thery - 2022
+Author : Simon Thery - 2022 - Licence : Mozilla Public License Version 2.0
 version 1.0
 */
 function EmptyDrawingPivotInPlace() {
