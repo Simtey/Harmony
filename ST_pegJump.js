@@ -1,4 +1,4 @@
-// Simon Thery - 2023 - ST_pegJump
+// Simon Thery - 2023 - ST_pegJump - Licence : Mozilla Public License Version 2.0
 
 function ST_pegJump() {
     var selNode = selection.selectedNode(0);

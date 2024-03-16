@@ -1,4 +1,4 @@
-/* Simon Thery - 2022 - goToPreviousPegKeyframe v1.2
+/* Simon Thery - 2022 - goToPreviousPegKeyframe v1.2 - Licence : Mozilla Public License Version 2.0
 Select the first peg above the selected drawing and goes to the previous keyframe
 
 version 1.1 : now also works with the deformers and if you directly select an attribute in the timemline.
