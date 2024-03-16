@@ -24,10 +24,10 @@ function ST_AddDrawExpo() {
 			d.okButtonText = "Continue";
 			d.cancelButtonText = "Abort";
 			var bodyText = new Label();
-			bodyText.text = "The drawing substitution " + nextKeyDrawExpoName2 + " will be replaced with the previous one " + nextKeyDrawExpoName + "\nDo you still want to proceed ?";
+			bodyText.text = "The drawing substitution " + nextKeyDrawExpoName + " will be replaced with the previous one " + KeyDrawExpoPrevName + "\nDo you still want to proceed ?";
 			d.add(bodyText);
 			if (!d.exec()) {
-				return false;
+				return;
 			}
 		}
 		column.addKeyDrawingExposureAt(ColumnsArray[i], nextDrawExpo + 1);
