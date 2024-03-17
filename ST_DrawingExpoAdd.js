@@ -1,11 +1,11 @@
-function ST_AddDrawExpo() {
+function ST_DrawingExpoAdd() {
 	var ColumnsArray = [];
 	var currentKf = frame.current();
 	var nextDrawExpo;
 	var nextKeyDrawExpoName;
 	var nextKeyDrawExpoName2;
 	var endKf = frame.numberOf();
-	scene.beginUndoRedoAccum("ST_AddDrawExpo");
+	scene.beginUndoRedoAccum("ST_DrawingExpoAdd");
 	CreateColumnArray();
 	for (var i in ColumnsArray) {
 		var KeyDrawExpoPrevName = column.getDrawingName(ColumnsArray[i], currentKf);
