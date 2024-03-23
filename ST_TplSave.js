@@ -8,13 +8,25 @@ function ST_TplSave() {
 	var dir = new Dir;
 	dir.path = localPath;
 	var tplVersion = 1;
+	nodesArray = [];
 	if (selNodes) {
 		var nodeName = node.getName(selNodes[0]);
-		checkFile();
+		addNodesFromTimeline();
+		getVersionNumber();
 		copyPaste.createTemplateFromSelection(nodeName + "-v" + tplVersion.toString(), localPath);
 	}
 
-	function checkFile() {
+	function addNodesFromTimeline() {
+		var numSelLayers = Timeline.numLayerSel;
+		for (var i = 0; i < numSelLayers; i++) {
+			if (Timeline.selIsNode(i)) {
+				nodesArray.push(Timeline.selToNode(i));
+			}
+		}
+		selection.addNodesToSelection(nodesArray);
+	}
+
+	function getVersionNumber() {
 		var allTpl = dir.entryList("*.tpl");
 		var myCharacTpl = [];
 		for (var i in allTpl) {
