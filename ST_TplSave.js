@@ -1,5 +1,5 @@
 /* ST_TplSave - Simon Thery - 2024 - MPL 2.0
-Save a tpl from your selection in a specific folder
+Save a tpl from your selection in a specific folder next to the .xstage of the scene
 */
 function ST_TplSave() {
 	var FolderName = "TplSave"; // Here you can change the name of the folder where the script saves the tpl files
