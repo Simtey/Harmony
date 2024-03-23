@@ -2,7 +2,7 @@
 Save a tpl from your selection in a specific folder
 */
 function ST_TplSave() {
-	var FolderName = "TplSave"; // He you can change the name of the folder where the script saves the tpl files
+	var FolderName = "TplSave"; // Here you can change the name of the folder where the script saves the tpl files
 	var selNodes = selection.selectedNodes();
 	var localPath = scene.currentProjectPath() + "/" + FolderName;
 	var dir = new Dir;
