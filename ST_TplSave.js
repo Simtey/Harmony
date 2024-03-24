@@ -14,6 +14,8 @@ function ST_TplSave() {
 		addNodesFromTimeline();
 		getVersionNumber();
 		copyPaste.createTemplateFromSelection(nodeName + "-v" + tplVersion.toString(), localPath);
+selection.clearSelection()	;
+selection.addNodesToSelection(selNodes);
 	}
 
 	function addNodesFromTimeline() {
