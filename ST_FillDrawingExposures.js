@@ -3,7 +3,7 @@ var columnName = Timeline.selToColumn(0);
 var drawExpoName = column.getDrawingName(columnName, frame.current());
 
 if (column.type(columnName) === "DRAWING") {
-	for (var i = frame.current(); i >= 1; i--) { // je cherche le dessin d'avant (nom + frame) (si pas de dessin avant rien ne se passe)
+	for (var i = frame.current(); i >= 1; i--) { 
 		if (column.getDrawingName(columnName, i) !== drawExpoName) {
 			var previousDrawExpo = i;
 			break;
@@ -20,7 +20,7 @@ if (column.type(columnName) === "DRAWING") {
 scene.beginUndoRedoAccum("ST_FillDrawingExposures");
 if (previousDrawExpo) {
 	column.fillEmptyCels(columnName, previousDrawExpo, nextDrawExpo);
-} else if (nextDrawExpoName) {
+} else if (nextDrawExpoName && !drawExpoName) {
 	var layerName = column.getDisplayName(columnName) + "-";
 	var drawingSubName = nextDrawExpoName.slice(layerName.length, -4)
 	for (var i = 1; i < nextDrawExpo; i++) {
