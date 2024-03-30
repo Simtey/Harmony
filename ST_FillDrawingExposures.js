@@ -3,7 +3,7 @@ function ST_FillDrawingExposures() {
 	MessageLog.clearLog();
 	var columnName = Timeline.selToColumn(0);
 	var drawExpoName = column.getDrawingName(columnName, frame.current());
-	if (column.type(columnName) === "DRAWING") { // si la colonne est un drawing
+	if (column.type(columnName) === "DRAWING") {
 		for (var i = frame.current(); i >= 1; i--) {
 			if (column.getDrawingName(columnName, i) !== drawExpoName) {
 				var previousDrawExpo = i;
@@ -18,7 +18,6 @@ function ST_FillDrawingExposures() {
 			}
 		}
 		scene.beginUndoRedoAccum("ST_FillDrawingExposures");
-
 		if (previousDrawExpo && nextDrawExpoName) { // if empty between two drawings
 			column.fillEmptyCels(columnName, previousDrawExpo, nextDrawExpo);
 
@@ -29,19 +28,22 @@ function ST_FillDrawingExposures() {
 				var prevDrawExpoName = drawExpoName;
 				previousDrawExpo += 1;
 			}
-			var d = new Dialog();
-			d.title = "FIll empty cells to the end ?";
-			d.okButtonText = "Continue";
-			d.cancelButtonText = "Abort";
-			var bodyText = new Label();
-			bodyText.text = "The drawing substitution " + drawingSubName + " will be extended to the end " + "\nDo you want to proceed ?";
-			d.add(bodyText);
-			if (!d.exec()) {
-				return;
-			}
 			var layerName = column.getDisplayName(columnName) + "-";
 			var drawingSubName = prevDrawExpoName.slice(layerName.length, -4)
-			MessageLog.trace(drawingSubName);
+			var skipDial = KeyModifiers.IsControlPressed();
+			if (skipDial === false) {
+				
+				var d = new Dialog();
+				d.title = "FIll empty cells to the end ?";
+				d.okButtonText = "Continue";
+				d.cancelButtonText = "Abort";
+				var bodyText = new Label();
+				bodyText.text = "The drawing substitution " + drawingSubName + " will be extended to the end ! " + "\nDo you want to proceed ?" + "\n\n maintain the ctrl key to avoid this dialog box next time";
+				d.add(bodyText);
+				if (!d.exec()) {
+					return;
+				}
+			}
 			for (var i = previousDrawExpo; i <= frame.numberOf(); i++) {
 				column.setEntry(columnName, 1, i, drawingSubName);
 			}
