@@ -10,7 +10,7 @@
 
 **ST_FillDrawingExposures** : fill the empty cells between two drawing substitutions (no need to select a range in the timeline).
 
-**goToPreviousPegKeyframe** / **ST_goToNextPegKeyframe** : Go to the previous / next keyframe without the need of selected the peg with "b". Very usefull for the puppet animation (as a shortcut)
+**ST_goToPreviousPegKeyframe** / **ST_goToNextPegKeyframe** : Go to the previous / next keyframe without the need of selected the peg with "b". Very usefull for the puppet animation (as a shortcut)
 
 **ST_KeyDrawingJumpers** : Goes directly to the previous / next Key drawing or Breakdown (usefull as shortcuts).
 
