@@ -2,7 +2,7 @@
 ST_CleanExposuresLight - Simon Thery - 2023 - Licence : Mozilla Public License Version 2.0
 The fastest version of ST_CleanExposures --> just look at the layer selected to find the keyframes
 
-clean the drawing expositions to make them match to the pegs (useful at the posing steps in puppet productions)
+clean the drawing exposures to make them match to the pegs (useful at the posing steps in puppet productions)
 - if you chose a drawing in the camera view, it just clean this drawing considering the first keyframes (previous and next) found above (peg or deformer)
 - If you chose an open peg in the timeline or a peg in the camera view (with "B" for example) it will clean the nearest drawing under this peg between the nearest keyframes (previous and next) on this peg (or deformer).
 - if you chose closed peg (or group) in the timeline it cleans everything (choosing the nearests previous and next keyframes).

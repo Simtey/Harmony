@@ -1,5 +1,5 @@
-// ST_NextPrevKeyDrawing - Simon Thery 2024 - MPL-2.0
-// each functions permit to navigate frome one drawing to the other (key to key, or breakdown to breakdown)
+// ST_KeyDrawingJumpers - Simon Thery 2024 - MPL-2.0
+// each functions permit to navigate from one drawing to the other (key to key, or breakdown to breakdown)
 
 function ST_PreviousKeyDrawing() {
 	var prevKeyExpo = frame.current();

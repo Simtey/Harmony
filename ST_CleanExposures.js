@@ -2,7 +2,7 @@
 ST_CleanExposures() - Simon Thery - 2023 - Licence : Mozilla Public License Version 2.0
 Known issue --> it is slow with big puppets, see the light version if you don't need the transformers keyframes to be seen.
 
-clean the drawing expositions to make them match to the pegs (useful at the posing steps in puppet productions)
+clean the drawing exposures to make them match to the pegs (useful at the posing steps in puppet productions)
 - if you chose a drawing in the camera view, it just clean this drawing considering the first keyframes (previous and next) found above (peg or deformer)
 - If you chose an open peg in the timeline or a peg in the camera view (with "B" for example) it will clean the nearest drawing under this peg by checking all the pegs and deformers from this peg to the drawing to find the nearest keyframes (previous and next)
 - If you chose a multiple selection in the camera view it will clean all the drawing selected by checking all the pegs and deformers just above each one of these drawings and chosing the nearest keyframes on those pegs / deformers (previous and next)
