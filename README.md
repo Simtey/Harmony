@@ -7,7 +7,6 @@
 **ST_DrawingExpoAdd** / **ST_DrawingExpoRemove** : Extend / reduce a drawing substitution exposure from 1 without moving the other ones.
 
 **ST_emptyDrawingPivotInPlace** : Create an empty drawing and keep the drawing pivot in place
-- improvement to be done (next version) --> if deformer : reset the deformer.
 
 **ST_FillDrawingExposures** : fill the empty cells between two drawing substitutions (no need to select a range in the timeline).
 
