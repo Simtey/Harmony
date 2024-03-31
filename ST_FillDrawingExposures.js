@@ -1,6 +1,5 @@
 // ST_FillDrawingExposures - Simon Thery 2024 - MPL-2.0 - Fill the empty drawing regarding the previous one
 function ST_FillDrawingExposures() {
-	MessageLog.clearLog();
 	var columnName = Timeline.selToColumn(0);
 	var drawExpoName = column.getDrawingName(columnName, frame.current());
 	if (column.type(columnName) === "DRAWING") {
