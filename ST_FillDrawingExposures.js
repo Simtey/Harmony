@@ -1,37 +1,38 @@
 // ST_FillDrawingExposures - Simon Thery 2024 - MPL-2.0 - Fill the empty drawing regarding the previous one
 function ST_FillDrawingExposures() {
-	var columnName = Timeline.selToColumn(0);
-	var drawExpoName = column.getDrawingName(columnName, frame.current());
-	if (column.type(columnName) === "DRAWING") {
-		for (var i = frame.current(); i >= 1; i--) {
-			if (column.getDrawingName(columnName, i) !== drawExpoName) {
-				var previousDrawExpo = i;
+	var ColumnsArray = [];
+	CreateColumnArray();
+	var drawExpoName = column.getDrawingName(ColumnsArray[i], frame.current());
+	scene.beginUndoRedoAccum("ST_FillDrawingExposures");
+	for (var i in ColumnsArray) {
+		for (var j = frame.current(); j >= 1; j--) {
+			if (column.getDrawingName(ColumnsArray[i], j) !== drawExpoName) {
+				var previousDrawExpo = j;
 				break;
 			}
 		}
-		for (var j = frame.current(); j <= frame.numberOf(); j++) {
-			if (column.getDrawingName(columnName, j) !== drawExpoName) {
-				var nextDrawExpoName = column.getDrawingName(columnName, j);
-				var nextDrawExpo = j;
+		for (var k = frame.current(); k <= frame.numberOf(); k++) {
+			if (column.getDrawingName(ColumnsArray[i], k) !== drawExpoName) {
+				var nextDrawExpoName = column.getDrawingName(ColumnsArray[i], k);
+				var nextDrawExpo = k;
 				break;
 			}
 		}
-		scene.beginUndoRedoAccum("ST_FillDrawingExposures");
 		if (previousDrawExpo && nextDrawExpoName) { // if empty between two drawings
-			column.fillEmptyCels(columnName, previousDrawExpo, nextDrawExpo);
+			column.fillEmptyCels(ColumnsArray[i], previousDrawExpo, nextDrawExpo);
 
 		} else if (!nextDrawExpoName) { // if empty from a drawing to the end
 			if (!drawExpoName) { // if current frames is an empty drawing
-				var prevDrawExpoName = column.getDrawingName(columnName, previousDrawExpo);
+				var prevDrawExpoName = column.getDrawingName(ColumnsArray[i], previousDrawExpo);
 			} else {
 				var prevDrawExpoName = drawExpoName;
 				previousDrawExpo += 1;
 			}
-			var layerName = column.getDisplayName(columnName) + "-";
+			var layerName = column.getDisplayName(ColumnsArray[i]) + "-";
 			var drawingSubName = prevDrawExpoName.slice(layerName.length, -4)
 			var skipDial = KeyModifiers.IsControlPressed();
 			if (skipDial === false) {
-				
+
 				var d = new Dialog();
 				d.title = "FIll empty cells to the end ?";
 				d.okButtonText = "Continue";
@@ -43,18 +44,27 @@ function ST_FillDrawingExposures() {
 					return;
 				}
 			}
-			for (var i = previousDrawExpo; i <= frame.numberOf(); i++) {
-				column.setEntry(columnName, 1, i, drawingSubName);
+			for (var l = previousDrawExpo; l <= frame.numberOf(); l++) {
+				column.setEntry(ColumnsArray[i], 1, l, drawingSubName);
 			}
 
 		} else if (nextDrawExpo && !drawExpoName) { // if empty from the beginning to a drawing
-			var layerName = column.getDisplayName(columnName) + "-";
-			var drawingSubName = nextDrawExpoName.slice(layerName.length, -4)
-			for (var i = 1; i < nextDrawExpo; i++) {
-				column.setEntry(columnName, 1, i, drawingSubName);
+			layerName = column.getDisplayName(ColumnsArray[i]) + "-";
+			drawingSubName = nextDrawExpoName.slice(layerName.length, -4)
+			for (var m = 1; m < nextDrawExpo; m++) {
+				column.setEntry(ColumnsArray[i], 1, m, drawingSubName);
 			}
-			column.removeDuplicateKeyDrawingExposureAt(columnName, nextDrawExpo);
+			column.removeDuplicateKeyDrawingExposureAt(ColumnsArray[i], nextDrawExpo);
 		}
-		scene.endUndoRedoAccum("");
 	}
+
+	function CreateColumnArray() {
+		var numSelLayers = Timeline.numLayerSel;
+		for (var i = 0; i < numSelLayers; i++) {
+			if (Timeline.selIsColumn(i) && column.type(Timeline.selToColumn(i)) === "DRAWING") {
+				ColumnsArray.push(Timeline.selToColumn(i));
+			}
+		}
+	}
+	scene.endUndoRedoAccum("");
 }
