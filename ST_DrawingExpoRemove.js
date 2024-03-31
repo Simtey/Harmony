@@ -1,5 +1,4 @@
 function ST_DrawingExpoRemove() {
-	MessageLog.clearLog();
 	var ColumnsArray = [];
 	var currentKf = frame.current();
 	var nextKeyDrawExpoName;
