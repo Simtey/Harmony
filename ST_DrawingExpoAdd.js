@@ -4,7 +4,7 @@ function ST_DrawingExpoAdd() {
 	var nextDrawExpo;
 	var nextKeyDrawExpoName;
 	var nextKeyDrawExpoName2;
-	var endKf = frame.numberOf();
+	var endKf = frame.numberOf() + 1;
 	CreateColumnArray();
 	for (var i in ColumnsArray) {
 		var KeyDrawExpoPrevName = column.getDrawingName(ColumnsArray[i], currentKf);
@@ -19,7 +19,7 @@ function ST_DrawingExpoAdd() {
 		var layerName = column.getDisplayName(ColumnsArray[i]) + "-";
 		var prevDrawingSubName = KeyDrawExpoPrevName.slice(layerName.length, -4)
 		var nextDrawingSubName = nextKeyDrawExpoName.slice(layerName.length, -4)
-		if (nextKeyDrawExpoName !== nextKeyDrawExpoName2) {
+		if (nextKeyDrawExpoName !== nextKeyDrawExpoName2 && nextDrawExpo < endKf) {
 			if (!nextKeyDrawExpoName2) {
 				var deletionStatus = "deleted";
 			} else {
