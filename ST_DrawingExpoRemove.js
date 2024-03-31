@@ -1,24 +1,29 @@
 function ST_DrawingExpoRemove() {
+	MessageLog.clearLog();
 	var ColumnsArray = [];
 	var currentKf = frame.current();
-	var nextDrawExpo;
 	var nextKeyDrawExpoName;
-	var endKf = frame.numberOf();
+	var endKf = frame.numberOf() + 2;
 	scene.beginUndoRedoAccum("ST_DrawingExpoRemove");
 	CreateColumnArray();
 	for (var i in ColumnsArray) {
 		var KeyDrawExpoPrevName = column.getDrawingName(ColumnsArray[i], currentKf);
 		for (j = currentKf + 1; j < endKf; j++) {
 			nextKeyDrawExpoName = column.getDrawingName(ColumnsArray[i], j);
+			var bkpExpo = j;
 			if (nextKeyDrawExpoName !== KeyDrawExpoPrevName) {
 				var nextDrawExpo = j;
 				break;
 			}
 		}
-		var layerName = column.getDisplayName(ColumnsArray[i]) + "-";
-		var drawingSubName = nextKeyDrawExpoName.slice(layerName.length, -4)
-		column.setEntry(ColumnsArray[i], 1, nextDrawExpo - 1, drawingSubName);
-		column.setEntry(ColumnsArray[i], 1, nextDrawExpo, drawingSubName);
+		if (nextDrawExpo) {
+			var layerName = column.getDisplayName(ColumnsArray[i]) + "-";
+			var drawingSubName = nextKeyDrawExpoName.slice(layerName.length, -4)
+			column.setEntry(ColumnsArray[i], 1, nextDrawExpo - 1, drawingSubName);
+			column.setEntry(ColumnsArray[i], 1, nextDrawExpo, drawingSubName);
+		} else {
+			column.setEntry(ColumnsArray[i], 1, bkpExpo - 1, "");
+		}
 	}
 
 	function CreateColumnArray() {
