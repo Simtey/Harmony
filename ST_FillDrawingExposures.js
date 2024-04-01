@@ -36,14 +36,17 @@ function ST_FillDrawingExposures() {
 			previousDrawExpo = 1;
 			previousDrawExpoName = nextDrawExpoName;
 			nextDrawExpo += 1;
+			var dialogLabel = " beginning ! ";
 
 		} else if (!nextDrawExpoName) { // if no drawing after
 			nextDrawExpo = frame.numberOf() + 1;
 			var nextDrawExpoName = previousDrawExpoName;
+			var dialogLabel = " end ! ";
 		}
 		var layerName = column.getDisplayName(ColumnsArray[i]) + "-";
 		var prevDrawingName = previousDrawExpoName.slice(layerName.length, -4)
-		if (nextDrawExpo === frame.numberOf() + 1) { // If fill to the end
+		if (nextDrawExpo === frame.numberOf() + 1 || previousDrawExpo ===1) { // If fill to the end or the beginning
+
 			var skipDial = KeyModifiers.IsControlPressed();
 			if (skipDial === false) {
 				var d = new Dialog();
@@ -51,7 +54,7 @@ function ST_FillDrawingExposures() {
 				d.okButtonText = "Continue";
 				d.cancelButtonText = "Abort";
 				var bodyText = new Label();
-				bodyText.text = "The drawing substitution " + prevDrawingName + " will be extended to the end ! " + "\nDo you want to proceed ?" + "\n\n maintain the ctrl key to avoid this dialog box next time";
+				bodyText.text = "The drawing substitution " + prevDrawingName + " will be extended to the" + dialogLabel  + "\nDo you want to proceed ?" + "\n\n maintain the CTRL KEY to skip this dialog box next time";
 				d.add(bodyText);
 				if (!d.exec()) {
 					return;
