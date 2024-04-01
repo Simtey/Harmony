@@ -19,18 +19,18 @@ function ST_DrawingExpoAdd() {
 		var layerName = column.getDisplayName(ColumnsArray[i]) + "-";
 		var prevDrawingSubName = KeyDrawExpoPrevName.slice(layerName.length, -4)
 		var nextDrawingSubName = nextKeyDrawExpoName.slice(layerName.length, -4)
-		if (nextKeyDrawExpoName !== nextKeyDrawExpoName2 && nextDrawExpo < endKf) {
+		if (nextDrawExpo && nextKeyDrawExpoName && nextKeyDrawExpoName !== nextKeyDrawExpoName2 && nextDrawExpo !== endKf) {
 			if (!nextKeyDrawExpoName2) {
 				var deletionStatus = "deleted";
 			} else {
-				var deletionStatus = "replaced with the previous one ";
+				var deletionStatus = "replaced with the previous one " + prevDrawingSubName;
 			}
 			var d = new Dialog();
 			d.title = "A drawing exposure will be deleted";
 			d.okButtonText = "Continue";
 			d.cancelButtonText = "Abort";
 			var bodyText = new Label();
-			bodyText.text = "The drawing exposure " + nextDrawingSubName + " will be " + deletionStatus + prevDrawingSubName + "\nDo you still want to proceed ?";
+			bodyText.text = "The drawing exposure " + nextDrawingSubName + " will be " + deletionStatus + "\nDo you still want to proceed ?";
 			d.add(bodyText);
 			if (!d.exec()) {return;} // TO DISABLE THE DIALOG BOX --> add // before the beginning of this line (before the "if")
 		}
@@ -40,7 +40,7 @@ function ST_DrawingExpoAdd() {
 		} else if (nextKeyDrawExpoName && KeyDrawExpoPrevName) { // if exposure between two keys but current kf is exposed
 			column.addKeyDrawingExposureAt(ColumnsArray[i], nextDrawExpo + 1);
 			column.removeKeyDrawingExposureAt(ColumnsArray[i], nextDrawExpo);
-		} else { // if no exposure  between two keys and current kf is not exposed
+		} else if (nextKeyDrawExpoName) { // if no exposure  between two keys and current kf is not exposed
 			column.addKeyDrawingExposureAt(ColumnsArray[i], nextDrawExpo + 1);
 			column.setEntry(ColumnsArray[i], 1, nextDrawExpo, "");
 		}
