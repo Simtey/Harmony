@@ -37,7 +37,6 @@ function ST_FillDrawingExposures() {
 			previousDrawExpoName = nextDrawExpoName;
 			nextDrawExpo += 1;
 			var dialogLabel = " beginning ! ";
-
 		} else if (!nextDrawExpoName) { // if no drawing after
 			nextDrawExpo = frame.numberOf() + 1;
 			var dialogLabel = " end ! ";
@@ -45,7 +44,6 @@ function ST_FillDrawingExposures() {
 		var layerName = column.getDisplayName(ColumnsArray[i]) + "-";
 		var prevDrawingName = previousDrawExpoName.slice(layerName.length, -4)
 		if (nextDrawExpo === frame.numberOf() + 1 || previousDrawExpo ===1) { // If fill to the end or the beginning
-
 			var skipDial = KeyModifiers.IsControlPressed();
 			if (skipDial === false) {
 				var d = new Dialog();
