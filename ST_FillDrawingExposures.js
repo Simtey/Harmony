@@ -1,60 +1,68 @@
 // ST_FillDrawingExposures - Simon Thery 2024 - MPL-2.0 - Fill the empty drawing regarding the previous one
+
 function ST_FillDrawingExposures() {
 	var ColumnsArray = [];
+	var previousDrawExpo = 1;
 	CreateColumnArray();
-	var drawExpoName = column.getDrawingName(ColumnsArray[i], frame.current());
 	scene.beginUndoRedoAccum("ST_FillDrawingExposures");
 	for (var i in ColumnsArray) {
-		for (var j = frame.current(); j >= 1; j--) {
-			if (column.getDrawingName(ColumnsArray[i], j) !== drawExpoName) {
-				var previousDrawExpo = j;
-				break;
+		var previousDrawExpoName = column.getDrawingName(ColumnsArray[i], frame.current());
+		if (previousDrawExpoName) { // if on a drawing
+			for (var j = frame.current(); j <= frame.numberOf() + 1; j++) {
+				if (!column.getDrawingName(ColumnsArray[i], j) || column.getDrawingName(ColumnsArray[i], j) !== previousDrawExpoName) {
+					previousDrawExpo = j - 1;
+					break;
+				}
 			}
+		} else { // if on a non exposed frame
+			for (var j = frame.current(); j >= 1; j--) {
+				if (column.getDrawingName(ColumnsArray[i], j)) {
+					previousDrawExpo = j;
+					break;
+				}
+			}
+			previousDrawExpoName = column.getDrawingName(ColumnsArray[i], previousDrawExpo);
 		}
-		for (var k = frame.current(); k <= frame.numberOf(); k++) {
-			if (column.getDrawingName(ColumnsArray[i], k) !== drawExpoName) {
+		for (var k = previousDrawExpo + 1; k <= frame.numberOf(); k++) {
+			if (column.getDrawingName(ColumnsArray[i], k)) {
 				var nextDrawExpoName = column.getDrawingName(ColumnsArray[i], k);
 				var nextDrawExpo = k;
 				break;
 			}
 		}
-		if (previousDrawExpo && nextDrawExpoName) { // if empty between two drawings
-			column.fillEmptyCels(ColumnsArray[i], previousDrawExpo, nextDrawExpo);
+		if (!previousDrawExpoName && !nextDrawExpoName) { // if no drawing on the layer
+			return;
+		} else if (!previousDrawExpoName) { // if no drawing before
+			previousDrawExpo = 1;
+			previousDrawExpoName = nextDrawExpoName;
+			nextDrawExpo += 1;
 
-		} else if (!nextDrawExpoName) { // if empty from a drawing to the end
-			if (!drawExpoName) { // if current frames is an empty drawing
-				var prevDrawExpoName = column.getDrawingName(ColumnsArray[i], previousDrawExpo);
-			} else {
-				var prevDrawExpoName = drawExpoName;
-				previousDrawExpo += 1;
-			}
-			var layerName = column.getDisplayName(ColumnsArray[i]) + "-";
-			var drawingSubName = prevDrawExpoName.slice(layerName.length, -4)
+		} else if (!nextDrawExpoName) { // if no drawing after
+			nextDrawExpo = frame.numberOf() + 1;
+			var nextDrawExpoName = previousDrawExpoName;
+		}
+		var layerName = column.getDisplayName(ColumnsArray[i]) + "-";
+		var prevDrawingName = previousDrawExpoName.slice(layerName.length, -4)
+		if (nextDrawExpo === frame.numberOf() + 1) { // If fill to the end
 			var skipDial = KeyModifiers.IsControlPressed();
 			if (skipDial === false) {
-
 				var d = new Dialog();
 				d.title = "FIll empty cells to the end ?";
 				d.okButtonText = "Continue";
 				d.cancelButtonText = "Abort";
 				var bodyText = new Label();
-				bodyText.text = "The drawing substitution " + drawingSubName + " will be extended to the end ! " + "\nDo you want to proceed ?" + "\n\n maintain the ctrl key to avoid this dialog box next time";
+				bodyText.text = "The drawing substitution " + prevDrawingName + " will be extended to the end ! " + "\nDo you want to proceed ?" + "\n\n maintain the ctrl key to avoid this dialog box next time";
 				d.add(bodyText);
 				if (!d.exec()) {
 					return;
 				}
 			}
-			for (var l = previousDrawExpo; l <= frame.numberOf(); l++) {
-				column.setEntry(ColumnsArray[i], 1, l, drawingSubName);
+		}
+		var nextDrawExpoName2 = column.getDrawingName(ColumnsArray[i], previousDrawExpo + 1);
+		if (!nextDrawExpoName2) {
+			for (var m = previousDrawExpo; m < nextDrawExpo; m++) {
+				column.setEntry(ColumnsArray[i], 1, m, prevDrawingName);
 			}
-
-		} else if (nextDrawExpo && !drawExpoName) { // if empty from the beginning to a drawing
-			layerName = column.getDisplayName(ColumnsArray[i]) + "-";
-			drawingSubName = nextDrawExpoName.slice(layerName.length, -4)
-			for (var m = 1; m < nextDrawExpo; m++) {
-				column.setEntry(ColumnsArray[i], 1, m, drawingSubName);
-			}
-			column.removeDuplicateKeyDrawingExposureAt(ColumnsArray[i], nextDrawExpo);
 		}
 	}
 
