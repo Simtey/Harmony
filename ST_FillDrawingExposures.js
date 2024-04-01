@@ -40,7 +40,6 @@ function ST_FillDrawingExposures() {
 
 		} else if (!nextDrawExpoName) { // if no drawing after
 			nextDrawExpo = frame.numberOf() + 1;
-			var nextDrawExpoName = previousDrawExpoName;
 			var dialogLabel = " end ! ";
 		}
 		var layerName = column.getDisplayName(ColumnsArray[i]) + "-";
