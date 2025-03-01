@@ -1,3 +1,5 @@
+/*ST_DrawingExpoAdd - Simon Thery - 2024 - Licence : Mozilla Public License Version 2.0
+To be used as a shorcut ('ctrl' + '+' for instance) - Add an exposure to the current drawing only (don't push the entire timeline)*/
 function ST_DrawingExpoAdd() {
 	var ColumnsArray = [];
 	var currentKf = frame.current();
@@ -44,7 +46,6 @@ function ST_DrawingExpoAdd() {
 			column.addKeyDrawingExposureAt(ColumnsArray[i], nextDrawExpo + 1);
 			column.setEntry(ColumnsArray[i], 1, nextDrawExpo, "");
 		}
-		scene.endUndoRedoAccum("");
 	}
 
 	function CreateColumnArray() {
@@ -55,4 +56,5 @@ function ST_DrawingExpoAdd() {
 			}
 		}
 	}
+	scene.endUndoRedoAccum("");
 }

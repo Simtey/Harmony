@@ -1,3 +1,5 @@
+/*ST_DrawingExpoRemove - Simon Thery - 2024 - Licence : Mozilla Public License Version 2.0
+To be used as a shorcut ('ctrl' + '-' for instance) - Delete an exposure to the current drawing only (don't pull the entire timeline)*/
 function ST_DrawingExpoRemove() {
 	var ColumnsArray = [];
 	var currentKf = frame.current();
